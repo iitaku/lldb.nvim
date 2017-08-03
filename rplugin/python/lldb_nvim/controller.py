@@ -269,7 +269,7 @@ class Controller(Thread):  # pylint: disable=too-many-instance-attributes
         (success, output) = self.get_command_result(command, True)
         if not success:
             self.buffers.logs_append(output, u'\u2717')
-        elif len(output) > 0:
+        elif output and len(output) > 0:
             self.buffers.logs_append(output, u'\u2713')
 
         state_changes = self.get_state_changes()
