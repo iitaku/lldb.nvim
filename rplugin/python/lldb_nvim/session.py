@@ -122,6 +122,12 @@ class Session:  # pylint: disable=too-many-instance-attributes
                 self.ctrl.exec_command(self.format(val))
         self.ctrl.busy_less()
 
+    def get_current_mode(self):
+        if '@mode' in self.internal:
+            return self.internal['@mode']
+        else:
+            return None
+
     def get_modes(self):
         if 'modes' in self.state:
             return self.state['modes'].keys()

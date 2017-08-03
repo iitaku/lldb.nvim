@@ -45,6 +45,14 @@ function! lldb#remote#stdin_prompt(...)
   call lldb#remote#__notify("stdin", strin)
 endfun
 
+function! lldb#remote#get_current_mode()
+  if exists('g:lldb#_channel_id')
+    return rpcrequest(g:lldb#_channel_id, 'get_current_mode')
+  else
+    return ''
+  endif
+endfun
+
 function! lldb#remote#get_modes()
   if exists('g:lldb#_channel_id')
     return rpcrequest(g:lldb#_channel_id, 'get_modes')

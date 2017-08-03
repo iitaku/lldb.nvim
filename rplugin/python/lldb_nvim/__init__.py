@@ -70,6 +70,15 @@ class Middleman:
             self.logger.warn("%s on %s | %s", str(e), repr(line[:pos]), repr(line[pos:]))
             return []
 
+    @neovim.rpc_export('get_current_mode', sync=True)
+    def _get_current_mode(self):
+        try:
+            return self.ctrl.safe_call(self.ctrl.session.get_current_mode,
+                                       [], True, timeout=1)
+        except EventLoopError as e:
+            self.logger.warn(str(e))
+            return None
+
     @neovim.rpc_export('get_modes', sync=True)
     def _get_modes(self):
         try:
